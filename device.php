@@ -23,6 +23,7 @@ $D['model'] = get_device_model();
 $D['user'] = @get_current_user();
 $D['hostname'] = gethostname();
 $D['hostip'] = ('/'==DIRECTORY_SEPARATOR) ? $_SERVER['SERVER_ADDR'] : @gethostbyname($_SERVER['SERVER_NAME']);
+$D['publicip'] = get_public_ip();
 $D['yourip'] = $_SERVER['REMOTE_ADDR'];
 $D['uname'] = @php_uname();
 $D['os'] = explode(" ", php_uname());
@@ -58,6 +59,10 @@ else{
 
 function get_device_model(){
     return ['name' => 'Raspberry Pi', 'id' => 'raspberry-pi'];
+}
+
+function get_public_ip(){
+    return `curl ipinfo.io/ip`;
 }
 
 function get_info(){
